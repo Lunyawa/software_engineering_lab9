@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import datetime
 
 if __name__ == '__main__':
     # Список успеваемости
-    students = []
+    humans = []
 
     # Организовать бесконечный цикл запроса команд.
     while True:
@@ -19,21 +20,21 @@ if __name__ == '__main__':
         elif command == 'add':
             # Запросить данные о студенте.
             FIO = input('Ваши фамилия и инициалы: ')
-            group = input('введите номер своей группы: ')
-            grade = int(input('Ваша успеваемость: '))
+            number = input('введите номер телефона: ')
+            date = input('Ваша дата рождения: ')
 
             # Создать словарь.
-            student = {
+            human = {
                 'FIO': FIO,
-                'group': group,
-                'grade': grade,
+                'number': number,
+                'date': date,
             }
 
             # Добавить словарь в список.
-            students.append(student)
+            humans.append(human)
             # Отсортировать список в случае необходимости.
-            if len(student) > 1:
-                students.sort(key=lambda item: item.get(grade, ' '))
+            if len(human) > 1:
+                humans.sort(key=lambda item: item.get(date, ' '))
 
         elif command == 'list':
             # Заголовок таблицы.
@@ -48,44 +49,45 @@ if __name__ == '__main__':
                 '| {:^4} | {:^20} | {:^20} | {:^15} |'.format(
                     "No",
                     "ФИО.",
-                    "номер группы",
-                    "успеваемость"
+                    "номер телефона",
+                    "дата рождения"
                 )
             )
             print(line)
 
             # Вывести данные о всех сотрудниках.
-            for idx, student in enumerate(students, 1):
+            for idx, human in enumerate(humans, 1):
                 print(
                     '| {:>4} | {:<20} | {:<20} | {:>15} |'.format(
                         idx,
-                        student.get('FIO', ''),
-                        student.get('group', 0),
-                        student.get('grade', 0)
+                        human.get('FIO', ''),
+                        human.get('number', 0),
+                        human.get('date', 0)
                     )
                 )
             print(line)
 
         elif command == 'find':
             count = 0
-            for student in students:
-                if (student.get('grade') == 4) or (student.get('grade') == 5):
+            find = input("Введите номер телефона человека ")
+            for human in humans:
+                if human.get('number') == find:
                     count += 1
                     print(
-                        f"ФИО: {student.get('FIO', '')}\n"
-                        f"группа: {student.get('group', '')}\n"
-                        f"успеваемость: {student.get('grade', '')}\n"
+                        f"ФИО: {human.get('FIO', '')}\n"
+                        f"номер: {human.get('number', '')}\n"
+                        f"дата рождения: {human.get('date', '')}\n"
 
                     )
             if count == 0:
-                print("студенты с оценками 4 и 5 не найдены.")
+                print("человек с этим номером не найден.")
 
         elif command == 'help':
             # Вывести справку о работе с программой.
             print("Список команд:\n")
-            print("add - добавить студента;")
-            print("list - вывести список студентов;")
-            print("find - вывод на фамилий и номеров групп студента с оценками 4 и 5 ;")
+            print("add - добавить человека;")
+            print("list - вывести список людей;")
+            print("find - вывод человека номер которого запросили ;")
             print("help - отобразить справку;")
             print("exit - завершить работу с программой.")
 
