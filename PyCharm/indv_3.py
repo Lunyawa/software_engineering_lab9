@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import datetime
 
 if __name__ == '__main__':
     # Список успеваемости
