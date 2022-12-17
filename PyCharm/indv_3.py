@@ -34,7 +34,7 @@ if __name__ == '__main__':
             humans.append(human)
             # Отсортировать список в случае необходимости.
             if len(human) > 1:
-                humans.sort(key=lambda item: item.get(date, ' '))
+                humans.sort(key=lambda item: item.get("date", ' '))
 
         elif command == 'list':
             # Заголовок таблицы.
