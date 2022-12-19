@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import datetime as DT
 
 if __name__ == '__main__':
     # Список успеваемости
@@ -20,20 +21,22 @@ if __name__ == '__main__':
             # Запросить данные о студенте.
             FIO = input('Ваши фамилия и инициалы: ')
             number = input('введите номер телефона: ')
-            date = input('Ваша дата рождения: ')
+            temp = input('Ваша дата рождения (dd/mm/yy): ')
+            birthday = DT.datetime.strptime(temp, '%d/%m/%Y').date()
+
 
             # Создать словарь.
             human = {
                 'FIO': FIO,
                 'number': number,
-                'date': date,
+                'date': birthday,
             }
 
             # Добавить словарь в список.
             humans.append(human)
             # Отсортировать список в случае необходимости.
             if len(human) > 1:
-                humans.sort(key=lambda item: item.get("date", ' '))
+                humans.sort(key=lambda item: item.get('date'))
 
         elif command == 'list':
             # Заголовок таблицы.
@@ -42,7 +45,7 @@ if __name__ == '__main__':
                 '-' * 20,
                 '-' * 20,
                 '-' * 15
-                )
+            )
             print(line)
             print(
                 '| {:^4} | {:^20} | {:^20} | {:^15} |'.format(
@@ -53,15 +56,14 @@ if __name__ == '__main__':
                 )
             )
             print(line)
-
             # Вывести данные о всех сотрудниках.
             for idx, human in enumerate(humans, 1):
                 print(
-                    '| {:>4} | {:<20} | {:<20} | {:>15} |'.format(
+                    '| {:>4} | {:<20} | {:<20} | {}      |'.format(
                         idx,
                         human.get('FIO', ''),
                         human.get('number', 0),
-                        human.get('date', 0)
+                        human.get('date')
                     )
                 )
             print(line)
